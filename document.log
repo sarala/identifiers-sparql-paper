@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2013.4.25)  30 MAY 2014 12:26
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2013.4.25)  30 MAY 2014 17:22
 entering extended mode
  %&-line parsing enabled.
 **document.tex
@@ -337,164 +337,80 @@ hat uses
  []
 
 
-Overfull \hbox (72.0918pt too wide) in paragraph at lines 31--33
+Overfull \hbox (50.308pt too wide) in paragraph at lines 31--34
 \OT1/phv/b/n/8 Availability: \OT1/phv/m/n/8 This IRI translating endpoint is av
-ailable at http://identifers.org/sparqlmapping
+ailable at http://identifers.org/mapping
  []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 37.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 38.
 
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 52.
+Underfull \hbox (badness 1571) in paragraph at lines 48--52
+\OT1/ptm/m/n/9 uses UniProtKB accessions to identify proteins, in the RDF
+ []
 
-Missing character: There is no … in font ptmr7t!
-Missing character: There is no … in font ptmr7t!
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 58.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 57.
 
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 58.
+Package natbib Warning: Citation `OpenRdfSesame' on page 1 undefined on input l
+ine 57.
 
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 59.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 60.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 70.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 69.
+(/usr/share/texmf/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+Overfull \hbox (16.1997pt too wide) in paragraph at lines 82--82
+[]       \OT1/pcr/m/n/9 concat("http://identifiers.org/uniprot/",[] 
+ []
 
 
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 71.
+Overfull \hbox (10.79971pt too wide) in paragraph at lines 105--105
+[]  \OT1/pcr/m/n/9 SERVICE<http://identifiers.org/sparqlmapping>[] 
+ []
 
 
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 72.
+LaTeX Font Warning: Font shape `OT1/cmtt/m/n' in size <6.5> not available
+(Font)              size <6> substituted on input line 126.
 
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 73.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 77.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 78.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 79.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 83.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 84.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 1 undefined on input line
- 85.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 86.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 133.
 
 (/usr/share/texmf/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 86.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 133.
  [1
 
 {/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 88.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 89.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 90.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 119.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 120.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 153.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 154.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 159.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 171.
-
-
-Package natbib Warning: Citation `Boffelli03' on page 2 undefined on input line
- 172.
-
-
-Underfull \hbox (badness 1748) in paragraph at lines 188--190
-\OT1/ptm/m/n/9 National Institutes of Health grants [1U41HG006104-03] and
+Underfull \hbox (badness 2452) in paragraph at lines 162--164
+ \OT1/ptm/m/it/9 Funding[][] \OT1/ptm/m/n/9 . Funding: Japanese grants, EMBL an
+d European
  []
 
 
-Underfull \hbox (badness 2376) in paragraph at lines 188--190
-\OT1/ptm/m/n/9 NCBO [U54-HG004028] and the Swiss Federal Government
+Underfull \hbox (badness 3364) in paragraph at lines 162--164
+\OT1/ptm/m/n/9 Union grants XXXXX. National Institutes of Health grants
  []
 
 (./document.bbl
 Missing character: There is no è in font ptmr7t!
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 10.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 17.
 )
-Extra height:20.51544pt when 549.103pt
-Extra height:20.51544pt when 550.103pt
-Extra height:20.51544pt when 551.103pt
-Extra height:20.51544pt when 552.103pt
-Extra height:20.51544pt when 553.103pt
-Extra height:20.51544pt when 554.103pt
-Extra height:0.0pt when 555.103pt
-(2)Left:555.103pt Right:556.46387pt Output:555.103pt
-(2)Left:556.46387pt Right:556.46387pt Output:556.46387pt
+Extra height:0.0pt when 477.52206pt
+(2)Left:477.52206pt Right:457.64638pt Output:477.52206pt
 - LAST -
 Extra skip:0.0pt
-Left:556.46387pt
-Right:556.46387pt
-Output:556.46387pt
+Left:477.52206pt
+Right:457.64638pt
+Output:477.52206pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 204.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 177.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 204.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 177.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][] 
@@ -519,26 +435,28 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 2367 strings out of 256216
- 26642 string characters out of 1917072
- 99917 words of memory out of 1500000
- 5591 multiletter control sequences out of 10000+200000
- 47093 words of font info for 92 fonts, out of 1200000 for 2000
+ 2407 strings out of 256216
+ 27217 string characters out of 1917072
+ 93917 words of memory out of 1500000
+ 5625 multiletter control sequences out of 10000+200000
+ 46485 words of font info for 95 fonts, out of 1200000 for 2000
  649 hyphenation exceptions out of 8191
- 35i,11n,26p,343b,344s stack positions out of 5000i,500n,6000p,200000b,15000s
+ 35i,11n,26p,863b,328s stack positions out of 5000i,500n,6000p,200000b,15000s
 {/usr/share/texmf/fonts/enc/dvips/base/8r.enc}</usr/share/texmf/fonts/type1/b
-luesky/cm/cmmi9.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb></usr/sha
-re/texmf/fonts/type1/bluesky/cm/cmr9.pfb></usr/share/texmf/fonts/type1/bluesky/
-cm/cmsy6.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsy7.pfb></usr/share/tex
-mf/fonts/type1/bluesky/cm/cmsy9.pfb></usr/share/texmf/fonts/type1/public/cmex/f
-mex9.pfb></usr/share/texmf/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texm
-f/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/share/texmf/fonts/type1/urw/helvet
-ic/uhvr8a.pfb></usr/share/texmf/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/shar
-e/texmf/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf/fonts/type1/urw/time
-s/utmr8a.pfb></usr/share/texmf/fonts/type1/urw/times/utmri8a.pfb>
-Output written on document.pdf (2 pages, 97517 bytes).
+luesky/cm/cmmi8.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi9.pfb></usr/sh
+are/texmf/fonts/type1/bluesky/cm/cmr7.pfb></usr/share/texmf/fonts/type1/bluesky
+/cm/cmr9.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsy6.pfb></usr/share/tex
+mf/fonts/type1/bluesky/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cm
+sy9.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmtt9.pfb></usr/share/texmf/fo
+nts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf/fonts/type1/urw/helvetic/uhv
+b8a.pfb></usr/share/texmf/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/share/texm
+f/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf/fonts/type1/urw/helveti
+c/uhvro8a.pfb></usr/share/texmf/fonts/type1/urw/times/utmb8a.pfb></usr/share/te
+xmf/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf/fonts/type1/urw/times/ut
+mri8a.pfb>
+Output written on document.pdf (2 pages, 123984 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
+ 74 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

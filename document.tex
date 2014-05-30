@@ -7,9 +7,9 @@
 
 \title[IRI translation for SPARQL using identifiers.org]{IRI translation for SPARQL using identifiers.org}
 \author[Jerven Bolleman \textit{et~al}]{Jerven Bolleman\,$^{1}$, Camille Laibe\,$^{2,*}$, Toshiaki Katayama\,$^{3}$ Nicole Redaschi\, $^{1}$ and Nick Jutty\,$^2$\footnote{to whom correspondence should be addressed}}
-\address{$^{1}$Swiss-Prot group, SIB Swiss Institute of Bioinformatics, , Centre Medical Universitaire, 1211 Geneve, Switzerland \\
+\address{$^{1}$Swiss-Prot group, SIB Swiss Institute of Bioinformatics, Centre Medical Universitaire, 1211 Geneve, Switzerland \\
 $^{2}$European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI), Wellcome Trust Genome Campus, Hinxton, Cambridge CB10 1SD, UK \\
-$^{3}$DBCLS, }
+$^{3}$Database Center for Life Science, Research Organization of Information and Systems, 178-4-4 Wakashiba, Kashiwa, Chiba 277-0871, Japan}
 
 \history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
 
@@ -22,107 +22,114 @@ $^{3}$DBCLS, }
 \section{Motivation:}
 On the semantic web and in life science data in particular there are many sources of information (documents available via http) about unique resources.
 Each of these sources is likely to use their own IRI as an idenfier for conceptualy the same resource or database record. 
-For example \href{http://identifiers.org/uniprot/P05067}{http://identifiers.org/uniprot/P05067} and \href{http://purl.uniprot.org/uniprot/P05067}{http://purl.uniprot.org/uniprot/P05067} are both identifiers for the UniProtKB database record a unique resource.
+For example \href{http://identifiers.org/uniprot/P05067}{http://identifiers.org/uniprot/P05067} and \href{http://purl.uniprot.org/uniprot/P05067}{http://purl.uniprot.org/uniprot/P05067} are both identifiers for the same UniProtKB database record a unique resource.
 This multitude of identifiers introduce a barrier when executing federated SPARQL queries between different databases.
 
 \section{Results:}
 We introduce a virtual SPARQL endpoint that uses identifiers.org knowledge about IRI patterns to automatically translate identifiers in one IRI pattern to another, making cross database querying easier and more robust. This endpoint supports the full SPARQL 1.1.
 
 \section{Availability:}
-This IRI translating endpoint is available at \href{http://identifiers.org/sparqlmapping}{http://identifers.org/sparqlmapping} and is free to use.
+This IRI translating endpoint is available at \href{http://identifiers.org/mapping}{http://identifers.org/mapping} and is free to use.
+The underlying prototype code can be found at \href{https://github.com/JervenBolleman/sparql-identifiers}{github}.
 
-\section{Contact:} \href{camille.laibe@ebi.ac.uk}{camille.laibe@ebi.ac.uk}
+\section{Contact:} \href{camille.laibe@ebi.ac.uk}{Camille Laibe}
 \end{abstract}
 
 \section{Introduction}
 
-The use of RDF to model and SPARQL to query data is becoming more common in the life sciences \cite{Jupp01052014}.
+The use of RDF to model and SPARQL to query data is becoming more common in the life sciences, see for examples \cite{Jupp01052014} and \cite{BioHack2011and2012}.
 As anyone can say anything about anything in the semantic web there are more and more places where one can find information about the ``same'' thing.
-For example the bio2rdf data mashup of XXXX contains more information about a record than a primary souce.
+For example the bio2rdf (\cite{Belleau2008706}) data mashup contains more information about a record than the primary sources.
+For this reason bio2rdf makes this mashup available via http IRIs on the bio2rdf domain, allowing direct http access to records as bio2rdf sees them.
+Unfortunatly this introduces two identifiers for what is conceptually the same resource.
+A multitude of identifiers or web addresses for the same resouce is an unfortunate side effect of using the very practical decision to support the http protocol to enable access to information.
+When doing cross database queries using the SPARQL federalisation abilities this IRI mismatch makes it easy to miss links in the data.
 
-
-For example a database such as WikiPathways \cite{Kelder16112011} uses UniProtKB accessions to identify proteins, in the RDF representation of WikiPathways they use the
+Another example is WikiPathways \cite{Kelder16112011}, which uses UniProtKB accessions to identify proteins, in the RDF representation of WikiPathways they use the
 identifers.org IRIs as identifiers of resources in databases they reference.
+While the cannonical source at \href{http://www.uniprot.org}{uniprot.org} (\cite{UniProt2013}) uses purl.uniprot.org IRIs.
+This means that a cross database query between the \href{http://sparql.wikipathways.org/}{WikiPathways}  and \href{http://beta.sparql.uniprot.org/sparql}{uniprot sparql endpoint} needs to rewrite IRIs on the fly as shown in figure \ref{stringstuff}.
 
- \section{Approach}
-
-We use the openrdf sesame SPARQL engine and extend it to translate specific query patterns to allow query translation.
 
 \begin{methods}
 \section{Methods}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+We use the openrdf sesame SPARQL engine\cite{OpenRdfSesame} and extend it to translate specific query patterns to allow query translation.
+In practical terms this can be done by hand see figure (\ref{stringstuff}) but it is much easier when using the identifiers.org sparqlmapping service as shown in figure \ref{translatestuff}.
 
-\begin{itemize}
-\item for bulleted list, use itemize
-\item for bulleted list, use itemize
-\item for bulleted list, use itemize
-\end{itemize}
+The openrdf SPARQL engine is easy to extend, the main integration point is the $getStatements$ method of a $TripleSource$.
+All in all we required a just under 1300 lines of java code to make the knowledge contained in the identifiers.org available via http to any other SPARQL service.
 
 
+\begin{figure}
+%PREFIX up:   <http://purl.uniprot.org/core/> 
+%PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+%PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+%PREFIX wp:   <http://vocabularies.wikipathways.org/wp#> 
+\begin{verbatim}
+SELECT ?protein ?diseaseComment ?pathway
+WHERE {
+  ?protein 
+    up:annotation/up:disease/rdfs:comment 
+      ?diseaseComment .
+  BIND(iri(
+       concat("http://identifiers.org/uniprot/", 
+             substr(str(?protein), 33))
+      ) AS ?wikiProtein)
+  SERVICE<http://sparql.wikipathways.org/>
+  { ?pathway wp:bdbUniprot ?wikiProtein . }
+}
+\end{verbatim}
+  \caption{A SPARQL query \href{http://beta.sparql.uniprot.org/sparql}{at the uniprot.org sparql endpoint} that combines information
+  in UniProtKB and Wikipathways. Note the BIND clause where the IRI is transformed from the purl.uniprot.org form to the identifiers.org one. (PREFIX declarations ommited for space reasons)}
+  \label{stringstuff}
+\end{figure}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text.
+\begin{figure}
+%PREFIX up:  <http://purl.uniprot.org/core/> 
+%PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+%PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> 
+%PREFIX wp:  <http://vocabularies.wikipathways.org/wp#> 
+%PREFIX owl: <http://http://www.w3.org/2002/07/owl#>
+\begin{verbatim}
+SELECT ?protein ?diseaseComment ?pathway
+WHERE {
+  ?protein 
+    up:annotation/up:disease/rdfs:comment 
+      ?diseaseComment .
+  SERVICE<http://identifiers.org/sparqlmapping>
+  { ?protein owl:sameAs ?wikiProtien . }
+  SERVICE<http://sparql.wikipathways.org/>
+  { ?pathway wp:bdbUniprot ?wikiProtein . }
+}
+\end{verbatim}
+  \caption{The same query as in figure \ref{stringstuff} but now using a SERVICE clause using identifiers.org to transform the purl.uniprot.org form of the IRIs to identifiers.org form.}
+  \label{translatestuff}
+\end{figure} 
 
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-
-
-
-\begin{table}[!t]
-\processtable{This is table caption\label{Tab:01}}
-{\begin{tabular}{llll}\toprule
-head1 & head2 & head3 & head4\\\midrule
-row1 & row1 & row1 & row1\\
-row2 & row2 & row2 & row2\\
-row3 & row3 & row3 & row3\\
-row4 & row4 & row4 & row4\\\botrule
-\end{tabular}}{This is a footnote}
-\end{table}
 
 \end{methods}
 
-\begin{figure}[!tpb]%figure1
-%\centerline{\includegraphics{fig01.eps}}
-\caption{Caption, caption.}\label{fig:01}
-\end{figure}
 
-\begin{figure}[!tpb]%figure2
-%\centerline{\includegraphics{fig02.eps}}
-\caption{Caption, caption.}\label{fig:02}
-\end{figure}
 
 \section{Discussion}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text.
+There are a number of mapping services aimed to map identifiers from one databases to an other.
+These are conceptual mappings e.g. they relate an identifier for a gene to its related protien products.
+In comparison identifiers.org has a different purpose, it is supposed to identify all sources of information about a single database record as identified by one identifier; independantly of the information provider.
+Identifiers.org could maintain lists of currently valid IRIs used in all SPARQL endpoints and in RDF datasets,
+unfortunatly this would be extremely time consuming and always out of sync.
+This is why the SPARQL service described in this papper only translates patterns and leaves it up to the real third party SPARQL endpoints to determine if a translated IRI is valid or not.
 
-
-
-
-Table~\ref{Tab:01} shows that Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that
-the above method Text Text. Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that
-the above method Text Text. Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that
-the above method Text Text.
+While the SPARQL service is SPARQL 1.1. compliant it's virtual nature can suprise end users.
+If the user does not put in the predcate $\mathtt{owl\colon{}sameAs}$ in a basic graph pattern in the SPARQL query, the query will return no results at all.
+The SPARQL correct solution would be to return the infinite possible IRI translations,
+however that technically correct solution is not at all usefull for any user.
+Instead we take the approach that identifiers.org/mapping is a remote service not under direct control by the user,
+and in our case it is under control of entity that deletes everything in the graph when such a query arrives and restores it after the query is answered.
+This solution allows the end-user the illusion of a valid SPARQL service that can translate all IRI patterns in the identifier.org database as if all these
+queries where matterialized, at a fraction of the cost. 
 
 
 
@@ -145,45 +152,15 @@ the above method Text Text.
 
 
 \section{Conclusion}
-
-(Table~\ref{Tab:01}) Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.
-
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-
-
-
-
-
-\begin{enumerate}
-\item this is item, use enumerate
-\item this is item, use enumerate
-\item this is item, use enumerate
-\end{enumerate}
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text.
-
-
-
-
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text
+Making identifiers.org mappings available on the fly make it easier to effectively use the federated query capacities of SPARQL 1.1 to combine information from multiple sources.
 
 
 \section*{Acknowledgement}
 
-The authors thank the DBCLS RDF Summit organisers.
-
+The authors thank the DBCLS RDF Summit organisers for hosting the software development.
 
 \paragraph{Funding\textcolon}.
-Funding: EMBL and European Union grants XXXXX. National Institutes of Health grants [1U41HG006104-03] and NCBO [U54-HG004028] and the Swiss Federal Government through the Federal Office of Education and Science. 
-
+Funding: Japanese grants, EMBL and European Union grants XXXXX. National Institutes of Health grants [1U41HG006104-03] and NCBO [U54-HG004028] and the Swiss Federal Government through the Federal Office of Education and Science.  
 
 \bibliographystyle{natbib}
 %\bibliographystyle{achemnat}
