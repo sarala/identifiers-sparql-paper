@@ -54,10 +54,10 @@ This means that a cross database query between the \href{http://sparql.wikipathw
 \begin{methods}
 \section{Methods}
 
-We use the openrdf sesame SPARQL engine\cite{OpenRdfSesame} and extend it to translate specific query patterns to allow query translation.
+We use the openrdf sesame SPARQL engine\cite{SESAME} and extend it to translate specific query patterns to allow query translation.
 In practical terms this can be done by hand see figure (\ref{stringstuff}) but it is much easier when using the identifiers.org sparqlmapping service as shown in figure \ref{translatestuff}.
 
-The openrdf SPARQL engine is easy to extend, the main integration point is the $getStatements$ method of a $TripleSource$.
+The openrdf SPARQL engine is easy to extend, the main integration point is the $getStatements$ method of a class extending $org.openrdf.query.algebra.evaluation.TripleSource$.
 All in all we required a just under 1300 lines of java code to make the knowledge contained in the identifiers.org available via http to any other SPARQL service.
 
 
@@ -131,29 +131,8 @@ and in our case it is under control of entity that deletes everything in the gra
 This solution allows the end-user the illusion of a valid SPARQL service that can translate all IRI patterns in the identifier.org database as if all these
 queries where matterialized, at a fraction of the cost. 
 
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%     please remove the " % " symbol from \centerline{\includegraphics{fig01.eps}}
-%     as it may ignore the figures.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
 \section{Conclusion}
 Making identifiers.org mappings available on the fly make it easier to effectively use the federated query capacities of SPARQL 1.1 to combine information from multiple sources.
-
 
 \section*{Acknowledgement}
 
