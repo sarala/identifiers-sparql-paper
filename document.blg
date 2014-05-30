@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.6)
+The top-level auxiliary file: document.aux
+The style file: natbib.bst
+Database file #1: document.bib
+Warning--I didn't find a database entry for "Boffelli03"
+You've used 1 entry,
+            2378 wiz_defined-function locations,
+            535 strings with 4452 characters,
+and the built_in function-call counts, 887 in all, are:
+= -- 51
+> -- 106
+< -- 0
++ -- 36
+- -- 34
+* -- 106
+:= -- 174
+add.period$ -- 5
+call.type$ -- 1
+change.case$ -- 6
+chr.to.int$ -- 1
+cite$ -- 1
+duplicate$ -- 20
+empty$ -- 37
+format.name$ -- 35
+if$ -- 159
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 1
+newline$ -- 8
+num.names$ -- 4
+pop$ -- 6
+preamble$ -- 1
+purify$ -- 6
+quote$ -- 0
+skip$ -- 13
+stack$ -- 0
+substring$ -- 43
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 9
+warning$ -- 0
+while$ -- 4
+width$ -- 0
+write$ -- 15
+(There was 1 warning)

@@ -1,0 +1,200 @@
+\documentclass{bioinfo}
+\copyrightyear{2005}
+\pubyear{2005}
+
+\begin{document}
+\firstpage{1}
+
+\title[IRI translation for SPARQL using identifiers.org]{IRI translation for SPARQL using identifiers.org}
+\author[Jerven Bolleman \textit{et~al}]{Jerven Bolleman\,$^{1}$, Camille Laibe\,$^{2,*}$, Toshiaki Katayama\,$^{3}$ Nicole Redaschi\, $^{1}$ and Nick Jutty\,$^2$\footnote{to whom correspondence should be addressed}}
+\address{$^{1}$Swiss-Prot group, SIB Swiss Institute of Bioinformatics, , Centre Medical Universitaire, 1211 Geneve, Switzerland \\
+$^{2}$European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI), Wellcome Trust Genome Campus, Hinxton, Cambridge CB10 1SD, UK \\
+$^{3}$DBCLS, }
+
+\history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
+
+\editor{Associate Editor: XXXXXXX}
+
+\maketitle
+
+\begin{abstract}
+
+\section{Motivation:}
+On the semantic web and in life science data in particular there are many sources of information (documents available via http) about unique resources.
+Each of these sources is likely to use their own IRI as an idenfier for conceptualy the same resource or database record. 
+For example \href{http://identifiers.org/uniprot/P05067}{http://identifiers.org/uniprot/P05067} and \href{http://purl.uniprot.org/uniprot/P05067}{http://purl.uniprot.org/uniprot/P05067} are both identifiers for the UniProtKB database record a unique resource.
+This multitude of identifiers introduce a barrier when executing federated SPARQL queries between different databases.
+
+\section{Results:}
+We introduce a virtual SPARQL endpoint that uses identifiers.org knowledge about IRI patterns to automatically translate identifiers in one IRI pattern to another, making cross database querying easier and more robust. This endpoint supports the full SPARQL 1.1.
+
+\section{Availability:}
+This IRI translating endpoint is available at \href{http://identifiers.org/sparqlmapping}{http://identifers.org/sparqlmapping} and is free to use.
+
+\section{Contact:} \href{camille.laibe@ebi.ac.uk}{camille.laibe@ebi.ac.uk}
+\end{abstract}
+
+\section{Introduction}
+
+The use of RDF to model and SPARQL to query data is becoming more common in the life sciences \cite{Jupp01052014}.
+As anyone can say anything about anything in the semantic web there are more and more places where one can find information about the ``same'' thing.
+For example the bio2rdf data mashup of XXXX contains more information about a record than a primary souce.
+
+
+For example a database such as WikiPathways \cite{Kelder16112011} uses UniProtKB accessions to identify proteins, in the RDF representation of WikiPathways they use the
+identifers.org IRIs as identifiers of resources in databases they reference.
+
+ \section{Approach}
+
+We use the openrdf sesame SPARQL engine and extend it to translate specific query patterns to allow query translation.
+
+\begin{methods}
+\section{Methods}
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+
+\begin{itemize}
+\item for bulleted list, use itemize
+\item for bulleted list, use itemize
+\item for bulleted list, use itemize
+\end{itemize}
+
+
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text.
+
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+
+
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+
+
+
+\begin{table}[!t]
+\processtable{This is table caption\label{Tab:01}}
+{\begin{tabular}{llll}\toprule
+head1 & head2 & head3 & head4\\\midrule
+row1 & row1 & row1 & row1\\
+row2 & row2 & row2 & row2\\
+row3 & row3 & row3 & row3\\
+row4 & row4 & row4 & row4\\\botrule
+\end{tabular}}{This is a footnote}
+\end{table}
+
+\end{methods}
+
+\begin{figure}[!tpb]%figure1
+%\centerline{\includegraphics{fig01.eps}}
+\caption{Caption, caption.}\label{fig:01}
+\end{figure}
+
+\begin{figure}[!tpb]%figure2
+%\centerline{\includegraphics{fig02.eps}}
+\caption{Caption, caption.}\label{fig:02}
+\end{figure}
+
+\section{Discussion}
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text.
+
+
+
+
+Table~\ref{Tab:01} shows that Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that
+the above method Text Text. Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that
+the above method Text Text. Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that
+the above method Text Text.
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%     please remove the " % " symbol from \centerline{\includegraphics{fig01.eps}}
+%     as it may ignore the figures.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\section{Conclusion}
+
+(Table~\ref{Tab:01}) Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.
+
+
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+
+
+
+
+
+\begin{enumerate}
+\item this is item, use enumerate
+\item this is item, use enumerate
+\item this is item, use enumerate
+\end{enumerate}
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text.
+
+
+
+
+
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text
+
+
+\section*{Acknowledgement}
+
+The authors thank the DBCLS RDF Summit organisers.
+
+
+\paragraph{Funding\textcolon}.
+Funding: EMBL and European Union grants XXXXX. National Institutes of Health grants [1U41HG006104-03] and NCBO [U54-HG004028] and the Swiss Federal Government through the Federal Office of Education and Science. 
+
+
+\bibliographystyle{natbib}
+%\bibliographystyle{achemnat}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{abbrv}
+%\bibliographystyle{bioinformatics}
+%
+%\bibliographystyle{plain}
+%
+%\bibliography{Document}
+\bibliography{document}  
+
+
+\end{document}
