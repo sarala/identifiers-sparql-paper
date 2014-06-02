@@ -6,7 +6,7 @@
 \firstpage{1}
 
 \title[IRI translation for SPARQL using identifiers.org]{IRI translation for SPARQL using identifiers.org}
-\author[Jerven Bolleman \textit{et~al}]{Jerven Bolleman\,$^{1}$, Camille Laibe\,$^{2,*}$, Toshiaki Katayama\,$^{3}$ Nicole Redaschi\, $^{1}$ and Nick Jutty\,$^2$\footnote{to whom correspondence should be addressed}}
+\author[Jerven Bolleman \textit{et~al}]{Jerven Bolleman\,$^{1}$, Camille Laibe\,$^{2\footnote{to whom correspondence should be addressed}}$, Toshiaki Katayama\,$^{3}$ Nicole Redaschi\, $^{1}$ and Nick Jutty\,$^2$}
 \address{$^{1}$Swiss-Prot group, SIB Swiss Institute of Bioinformatics, Centre Medical Universitaire, 1211 Geneve, Switzerland \\
 $^{2}$European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI), Wellcome Trust Genome Campus, Hinxton, Cambridge CB10 1SD, UK \\
 $^{3}$Database Center for Life Science, Research Organization of Information and Systems, 178-4-4 Wakashiba, Kashiwa, Chiba 277-0871, Japan}
@@ -20,16 +20,16 @@ $^{3}$Database Center for Life Science, Research Organization of Information and
 \begin{abstract}
 
 \section{Motivation:}
-On the semantic web and in life science data in particular there are many sources of information (documents available via http) about unique resources.
-Each of these sources is likely to use their own IRI as an idenfier for conceptualy the same resource or database record. 
-For example \href{http://identifiers.org/uniprot/P05067}{http://identifiers.org/uniprot/P05067} and \href{http://purl.uniprot.org/uniprot/P05067}{http://purl.uniprot.org/uniprot/P05067} are both identifiers for the same UniProtKB database record a unique resource.
+On the semantic web and in life science data in particular there are many sources of information (documents available via http) about unique information resources.
+Each of these sources is likely to use their own IRI (International Resource Identifier) for conceptualy the same resource or database record. 
+For example \href{http://identifiers.org/uniprot/P05067}{http://identifiers.org/uniprot/P05067} and \href{http://purl.uniprot.org/uniprot/P05067}{http://purl.uniprot.org/uniprot/P05067} are both identifiers for the same UniProtKB database record, a unique resource.
 This multitude of identifiers introduce a barrier when executing federated SPARQL queries between different databases.
 
 \section{Results:}
 We introduce a virtual SPARQL endpoint that uses identifiers.org knowledge about IRI patterns to automatically translate identifiers in one IRI pattern to another, making cross database querying easier and more robust. This endpoint supports the full SPARQL 1.1.
 
 \section{Availability:}
-This IRI translating endpoint is available at \href{http://identifiers.org/mapping}{http://identifers.org/mapping} and is free to use.
+This IRI translating endpoint is available at \linebreak\href{http://identifiers.org/mapping}{http://identifiers.org/mapping} and is free to use.
 The underlying prototype code can be found at \href{https://github.com/JervenBolleman/sparql-identifiers}{github}.
 
 \section{Contact:} \href{camille.laibe@ebi.ac.uk}{Camille Laibe}
@@ -39,6 +39,7 @@ The underlying prototype code can be found at \href{https://github.com/JervenBol
 
 The use of RDF to model and SPARQL to query data is becoming more common in the life sciences, see for examples \cite{Jupp01052014} and \cite{BioHack2011and2012}.
 As anyone can say anything about anything in the semantic web there are more and more places where one can find information about the ``same'' thing.
+Identifiers.org (\cite{Juty01012012}) is databases of places on the web where information about the ``same`` things can be found.
 For example the bio2rdf (\cite{Belleau2008706}) data mashup contains more information about a record than the primary sources.
 For this reason bio2rdf makes this mashup available via http IRIs on the bio2rdf domain, allowing direct http access to records as bio2rdf sees them.
 Unfortunatly this introduces two identifiers for what is conceptually the same resource.
@@ -57,8 +58,8 @@ This means that a cross database query between the \href{http://sparql.wikipathw
 We use the openrdf sesame SPARQL engine\cite{SESAME} and extend it to translate specific query patterns to allow query translation.
 In practical terms this can be done by hand see figure (\ref{stringstuff}) but it is much easier when using the identifiers.org sparqlmapping service as shown in figure \ref{translatestuff}.
 
-The openrdf SPARQL engine is easy to extend, the main integration point is the $getStatements$ method of a class extending $org.openrdf.query.algebra.evaluation.TripleSource$.
-All in all we required a just under 1300 lines of java code to make the knowledge contained in the identifiers.org available via http to any other SPARQL service.
+The openrdf SPARQL engine is easy to extend, the main integration point is the $getStatements$ method of a class extending $org.openrdf.query\linebreak.algebra.evaluation.TripleSource$.
+All in all we required just under 1300 lines of java code to make the knowledge contained in the identifiers.org available via http to any other SPARQL service.
 
 
 \begin{figure}
@@ -98,7 +99,7 @@ WHERE {
     up:annotation/up:disease/rdfs:comment 
       ?diseaseComment .
   SERVICE<http://identifiers.org/sparqlmapping>
-  { ?protein owl:sameAs ?wikiProtien . }
+  { ?protein owl:sameAs ?wikiProtein . }
   SERVICE<http://sparql.wikipathways.org/>
   { ?pathway wp:bdbUniprot ?wikiProtein . }
 }
@@ -123,7 +124,7 @@ unfortunatly this would be extremely time consuming and always out of sync.
 This is why the SPARQL service described in this papper only translates patterns and leaves it up to the real third party SPARQL endpoints to determine if a translated IRI is valid or not.
 
 While the SPARQL service is SPARQL 1.1. compliant it's virtual nature can suprise end users.
-If the user does not put in the predcate $\mathtt{owl\colon{}sameAs}$ in a basic graph pattern in the SPARQL query, the query will return no results at all.
+If the user does not put in the IRI $\mathtt{owl\textcolon{}sameAs}$ as the predicate in a basic graph pattern in the SPARQL query, the query will return no results at all.
 The SPARQL correct solution would be to return the infinite possible IRI translations,
 however that technically correct solution is not at all usefull for any user.
 Instead we take the approach that identifiers.org/mapping is a remote service not under direct control by the user,
@@ -139,7 +140,7 @@ Making identifiers.org mappings available on the fly make it easier to effective
 The authors thank the DBCLS RDF Summit organisers for hosting the software development.
 
 \paragraph{Funding\textcolon}.
-Funding: Japanese grants, EMBL and European Union grants XXXXX. National Institutes of Health grants [1U41HG006104-03] and NCBO [U54-HG004028] and the Swiss Federal Government through the Federal Office of Education and Science.  
+Funding: Japanese grants, EMBL and European Union grants XXXXX. National Institutes of Health grants [1U41HG006104] and the Swiss Federal Government through the Federal Office of Education and Science.  
 
 \bibliographystyle{natbib}
 %\bibliographystyle{achemnat}
