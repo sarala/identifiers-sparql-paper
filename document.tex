@@ -22,11 +22,11 @@ $^{5}$Babraham Institute, Babraham Research Campus, Cambridge, CB22 3AT, UK}
 
 \begin{abstract}
 \section{Motivation:}
-On the Semantic Web, in life sciences in particular, the data is often distributed via multiple resources.
-Each of these sources is likely to use their own IRI (International Resource Identifier) for conceptually the same resource or database record. This multitude of identifiers introduce a barrier when executing federated SPARQL queries between different datasets.
+On the Semantic Web, in life sciences in particular, data is often distributed via multiple resources.
+Each of these sources is likely to use their own IRI (International Resource Identifier) for conceptually the same resource or database record. This multitude of identifiers introduces a barrier when executing federated SPARQL queries between different datasets.
 
 \section{Results:}
-We introduce a virtual SPARQL endpoint provided by Identifiers.org, using its Registry's knowledge about IRI patterns, to automatically translate identifiers from one IRI pattern to another, making cross resources querying easier and more robust. This endpoint is fully SPARQL 1.1 compliant.
+We introduce a virtual SPARQL endpoint provided by Identifiers.org, using its Registry's knowledge about IRI patterns, to automatically translate identifiers from one IRI pattern to another, making querying across resources easier and more robust. This endpoint is fully SPARQL 1.1 compliant.
 
 \section{Availability:}
 This IRI translating endpoint is available at \linebreak\href{http://identifiers.org/services/sparql}{http://identifiers.org/services/sparql} and is free to use for all.
@@ -36,13 +36,15 @@ This IRI translating endpoint is available at \linebreak\href{http://identifiers
 
 
 \section{Introduction}
-The use of Semantic Web technologies such as the Resource Description Framework (RDF; \cite{Manola2004}) for publishing data is becoming popular in the life sciences. For example, Bio2RDF (\cite{Belleau2008706}) data mashup is one such resource built on the data from various publicly available biological databases translated into RDF and linked together. And, more recently, EMBL-EBI launched the EBI RDF platform (\cite{Jupp01052014}) in order to exposed some of the datasets it produces in RDF.
+The use of Semantic Web technologies such as the Resource Description Framework (RDF; \cite{Manola2004}) for publishing data is becoming popular in the life sciences. For example, the Bio2RDF (\cite{Belleau2008706}) data mashup is one such resource built upon the data from various publicly available biological databases translated into RDF and linked together. More recently, EMBL-EBI launched the EBI RDF platform (\cite{Jupp01052014}) in order to expose some of the datasets it produces in RDF.
 
-Bio2RDF uses normalized URIs (using in its own domain name) to support federated queries cross datasets. While all datasets part of the EBI RDF platform follow a set of rules regarding the URIs they can use, resulting in a consistent set of heterogeneous URIs used across all involved resources. Therefore, those two platforms provide linked datasets which can be queried easily as individual resources. However, the use of two different URI schemes for what are conceptually the same concepts makes it difficult to perform cross platform queries using SPARQL (\cite{Prud'hommeaux2008}), a query language for RDF, which supports complex queries, and can merge data distributed over multiple RDF resources. Thus, rewriting IRIs on the fly is required when querying between resources. String manipulation, supported by SPARQL, may be used for this purpose, but requires users to know in advance the IRI types being used in each resource, making it a cumbersome and inefficient solution.
+Bio2RDF uses normalized URIs (using in its own domain name) to support federated queries across datasets. Datasets that are part of the EBI RDF platform follow a set of rules regarding the URIs they can use, resulting in a consistent set of URIs used across all participating resources. Hence, while these two platforms provide linked datasets which can be easily queried individually, the use of two different URI schemes for what are essentially the same concepts makes it difficult to perform cross platform queries using SPARQL (\cite{Prud'hommeaux2008}).  
 
-Identifiers.org (\cite{Juty01012012}) provides resolvable persistent IRIs used to identify individual records (based on the existing entity identifiers created by the data providers) which are necessary for the Semantic Web vision, and Linked Data initiative. In order to achieve this, it relies on its Registry which contains information about datasets (or data collections) and lists the resources (or physical locations) which distribute them. The recoded information includes the different IRIs used to identify and access the individual records. For example, "plasma membrane" from the Gene Ontology (\cite{Ashburner2000}) is available from AmiGO (\cite{Carbon2009}), QuickGO (\cite{Binns2009}), Bio2RDF, etc.
+SPARQL, a query language for RDF which supports complex queries, can be used to merge data distributed over multiple RDF resources. To enable querying across different platforms, there is a need to rewrite IRIs on the fly. String manipulation, supported by SPARQL, may be used for this purpose but requires users to know in advance the IRI types being used in each resource, making it a cumbersome and inefficient solution. 
 
-To resolve cross queries issues, Identifiers.org has developed a virtual SPARQL endpoint to support IRI conversion between datasets. This relies on its existing infrastructure and Registry. Consequently, this provides an automatic system for linking and querying ever growing life science data resources.
+Identifiers.org (\cite{Juty01012012}) provides resolvable persistent IRIs used to identify individual records (based on the existing entity identifiers assigned directly by the data providers). IRI assignment is reliant upon an underlying Registry which contains information about individual datasets (data collection), the resources (or physical locations) which distribute them, and the different IRIs used to identify and access the individual records. For example, "plasma membrane" from the Gene Ontology (\cite{Ashburner2000}) is available from AmiGO (\cite{Carbon2009}), QuickGO (\cite{Binns2009}), Bio2RDF, OBO PURLs, etc.
+
+To resolve cross query issues, Identifiers.org has developed a virtual SPARQL endpoint to support IRI conversion between linked datasets using different IRI schemes. Consequently, this provides an automatic system for linking and querying ever growing number of life science data resources.
 
 %This has lead to some resources adopting Identifiers.org IRIs to publishing and referencing resources.
 %The knowledge in the Identifiers.org Registry can be used to convert between IRIs used in different datasets.
@@ -50,20 +52,18 @@ To resolve cross queries issues, Identifiers.org has developed a virtual SPARQL 
 
 \begin{methods}
 \section{Methods}
-The OpenRDF Sesame SPARQL engine (\cite{SESAME}) was extended to translate specific query patterns to allow IRI translation. Specially, the service has been designed to answer queries requesting IRIs and making use of the predicate $\mathtt{owl\textcolon{}sameAs}$.  When such queries are detected, the system determines from which data collection the identified entity comes from, then extracts from the Registry the alternative root URIs for this concept and finally generates the complete IRIs and returns them. The main integration point within the SESAME engine is the $getStatements$ method of a class extending $org.openrdf.query.algebra.evaluation.TripleSource$.
+The OpenRDF Sesame SPARQL engine (\cite{SESAME}) was extended to translate specific query patterns to allow IRI translation. Specifically, the service has been designed to answer queries requesting IRIs and making use of the predicate $\mathtt{owl\textcolon{}sameAs}$.  When such queries are detected, the system determines from which data collection the identified entity originates, extracts from the Registry the alternative root URIs for this concept, regenerates complete IRI alternative forms and returns them. The main integration point within the SESAME engine is the $getStatements$ method of a class extending $org.openrdf.query.algebra.evaluation.TripleSource$.
 
-The database underlying Identifiers.org's Registry was extended in order to be able to record alternative IRI schemes and the way to convert between them. Additionally, there is a constant curational effort to make sure this additional information is been recorded for all current and future data collections listed in the Registry.
+The database underlying Identifiers.org's Registry was extended in order to record alternative IRI schemes, and IRI-specific conversion patterns. This has additionally required a curational effort to ensure the necessary information has been stored in the Registry.
 
-This SPARQL endpoint is directly driven by the database used by the Registry and not by a triple store because it would not have been possible to provide the on demand conversion services otherwise. This explains the "virtual" in its name. 
-
-The resulting service is exposed as a virtual SPARQL endpoint at \href{http://identifiers.org/services/sparql}{http://identifiers.org/services/sparql}. LODEStar (\cite{LODEStar}), used by the EBI RDF platform, has been deployed to provide an interface for querying it.
+This is a "virtual" SPARQL endpoint, directly driven by the database underpinning the Registry, since a triple store would not have been able to provide the on demand conversion services required. The service is exposed at \href{http://identifiers.org/services/sparql}{http://identifiers.org/services/sparql}. LODEStar (\cite{LODEStar}), used by the EBI RDF platform, has been deployed to provide a query interface.
 \end{methods}
 
 
 \section{Results}
-The Identifiers.org virtual SPARQL endpoint can be used to list all different URI schemes available for a given URI. It can also be used to check whether two IRIs describes the same concept (although it is not a mapping service between entities provided by different datasets). Example queries can be found at the endpoint page URL.
+The Identifiers.org virtual SPARQL endpoint can be used to list all alternative URI schemes available for a given URI. It can also be used to check whether two IRIs describes the same concept (although it is not a mapping service between entities provided by different datasets). Example queries can be found at the endpoint page URL.
 
-With the Identifiers.org SPARQL service, it is possible to avoid using string manipulation within SPARQL query (figure \ref{translatestuff}) and does not require users to know which IRI patterns are being used within a given resource.
+With the Identifiers.org SPARQL service, it is possible to avoid using string manipulation within a SPARQL query (figure \ref{translatestuff}) and does not require users to know which IRI patterns are being used within a given resource.
 
 The query below illustrates how the service can be used to integrate resources using different IRI schemes. In this example, the resources are the EBI RDF platform (which uses IRIs of the form "http://identifiers.org/go/GO:0006915" for GO terms) and Bio2RDF (which uses IRIs of the form "http://bio2rdf.org/go:0006915" for GO terms). The query lists the cross-references to Gene Ontology terms present in the computational model "Edelstein1996 - EPSP ACh event" (BIOMD0000000001) from BioModels Database (\cite{Li2010}). It is executed from the BioModels' SPARQL endpoint (http://www.ebi.ac.uk/rdf/services/biomodels/sparql) and connects to Identifiers.org to retrieve the alternative IRIs for the retrieved GO terms. Those are then passed to the Bio2RDF SPARQL endpoint to retrieve the description of each GO term.
 
@@ -98,11 +98,11 @@ SELECT DISTINCT ?species ?annotation ?description WHERE {
 
 
 \section{Discussion}
-There are a number of mapping services aimed to connect identifiers from one database to another. However, these are conceptual mappings, e.g. they relate an identifier for a gene to its related protein products. In comparison, Identifiers.org records all access URLs and IRI based identification schemes used to identify records from a data collection.
+There are a number of mapping services aimed to connect identifiers from one database to another. However, these are conceptual mappings, for instance relating a gene identifier to its protein product. In contrast, Identifiers.org records all access URLs and IRI-based identification schemes used to identify individual entities from a single data collection.
 
 %Identifiers.org could maintain lists of currently valid IRIs used in all SPARQL endpoints and in RDF datasets, unfortunately this would be extremely time consuming and always out of sync. Thus the SPARQL service described in this paper only translates patterns and leaves it up to the real third party SPARQL endpoints to determine if a translated IRI is valid or not.
 
-Also, while the produced endpoint is SPARQL 1.1 compliant, its virtual nature (not based on an actual triple store) means the queries available are limited to IRIs using the $\mathtt{owl\textcolon{}sameAs}$ predicate in a basic graph pattern; otherwise no results will be returned. The correct SPARQL solution would be to return the infinite possible IRI translations, but although a technically correct solution, would not be useful at all. Instead we take the approach that Identifiers.org SPARQL endpoint is a remote service not under direct control by the user, and in our case it is under control of entity that deletes everything in the graph when such a query arrives and restores it after the query is answered.
+Also, while the produced endpoint is SPARQL 1.1 compliant, its virtual nature (not based on an actual triple store) means the queries available are limited to IRIs using the $\mathtt{owl\textcolon{}sameAs}$ predicate in a basic graph pattern; otherwise no results will be returned. The correct SPARQL solution would be to return the infinite possible IRI translations, but although a technically correct solution, would not be useful in practice. Instead we take the approach that Identifiers.org SPARQL endpoint is a remote service not under direct control by the user, and in our case it is under control of entity that deletes everything in the graph when such a query arrives and restores it after the query is answered.
 
 This solution provides users the illusion of a valid SPARQL service that can translate all IRI patterns recorded in the Identifier.org Registry as if all these queries where materialised, at a fraction of the cost.
 
@@ -112,7 +112,7 @@ This IRI conversion service, provided by Identifiers.org as a virtual SPARQL end
 \section*{Acknowledgement}
 The authors wish to thank the DBCLS RDF Summit and Biohackathon organisers for fostering the initial discussions and development efforts, and Simon Jupp for developing the generic LODEStar user interface used by this endpoint.
 
-\paragraph{Funding\textcolon} this work received support from the BBSRC (BB/J019305/1), Japanese grants (?), National Institutes of Health grants (1U41HG006104), the Swiss Federal Government through the Federal Office of Education and Science, and EMBL.  
+\paragraph{Funding\textcolon} This work received support from the BBSRC (BB/J019305/1), Japanese grants (?), National Institutes of Health grants (1U41HG006104), the Swiss Federal Government through the Federal Office of Education and Science, and EMBL.  
 
 \bibliographystyle{natbib}
 %\bibliographystyle{achemnat}
