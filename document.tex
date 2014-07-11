@@ -36,7 +36,7 @@ This IRI translating endpoint is available at \linebreak\href{http://identifiers
 The use of Semantic Web technologies such as the Resource Description Framework (RDF; \cite{Manola2004}) for publishing data is becoming popular in the life sciences.
 For example, the Bio2RDF (\cite{biordf2}) data mashup is one such resource built upon the data from various publicly available biological databases translated into RDF and linked together. More recently, EMBL-EBI in collaboration with the UniProt consortium has exposed some datasets in RDF via the EBI RDF platform (\cite{Jupp01052014}).
 
-Bio2RDF uses normalized URIs (using in its own domain name) to support federated queries across datasets. Datasets that are part of the EBI RDF platform follow a set of rules regarding the URIs they can use, resulting in a consistent set of URIs used across all participating resources. Hence, while these two platforms provide linked datasets which can be easily queried individually, the use of two different URI schemes for what are essentially the same concepts makes it difficult to perform cross platform queries using SPARQL (\cite{Prud'hommeaux2008}).  
+Bio2RDF uses normalized IRIs (using in its own domain name) to support federated queries across datasets. Datasets that are part of the EBI RDF platform follow a set of rules regarding the IRIs they can use, resulting in a consistent set of IRIs used across all participating resources. Hence, while these two platforms provide linked datasets which can be easily queried individually, the use of two different IRI schemes for what are essentially the same concepts makes it difficult to perform cross platform queries using SPARQL (\cite{Prud'hommeaux2008}).  
 
 SPARQL, a query language for RDF which supports complex queries, can be used to merge data distributed over multiple RDF resources. To enable querying across different platforms, there is a need to rewrite IRIs on the fly. 
 String manipulation, supported by SPARQL, may be used for this purpose but requires users to know in advance the IRI types being used in each resource, making it a cumbersome and inefficient solution. 
@@ -47,7 +47,7 @@ To resolve cross query issues, Identifiers.org has developed a virtual SPARQL en
 
 \begin{methods}
 \section{Methods}
-The OpenRDF Sesame SPARQL engine (\cite{SESAME}) was extended to translate specific query patterns to allow IRI translation. Specifically, the service has been designed to answer queries requesting IRIs and making use of the predicate $\mathtt{owl\textcolon{}sameAs}$. When such queries are detected, the system determines from which data collection the identified entity originates, extracts from the Registry the alternative root URIs for this concept, regenerates complete IRI alternative forms and returns them. The main integration point within the SESAME engine is the $getStatements$ method of a class extending $org.openrdf.query.algebra.evaluation.TripleSource$.
+The OpenRDF Sesame SPARQL engine (\cite{SESAME}) was extended to translate specific query patterns to allow IRI translation. Specifically, the service has been designed to answer queries requesting IRIs and making use of the predicate $\mathtt{owl\textcolon{}sameAs}$. When such queries are detected, the system determines from which data collection the identified entity originates, extracts from the Registry the alternative root IRIs for this concept, regenerates complete IRI alternative forms and returns them. The main integration point within the SESAME engine is the $getStatements$ method of a class extending $org.openrdf.query.algebra.evaluation.TripleSource$.
 
 The database underlying Identifiers.org's Registry was extended in order to record alternative IRI schemes. This has additionally required a curational effort to ensure the necessary information has been stored in the Registry.
 
@@ -55,7 +55,7 @@ This is a "virtual" SPARQL endpoint, directly driven by the database underpinnin
 \end{methods}
 
 \section{Results}
-The Identifiers.org virtual SPARQL endpoint can be used to list all alternative URI schemes available for a given URI. It can also be used to check whether two IRIs describes the same concept (although it is not a mapping service between entities provided by different datasets). Example queries can be found at the endpoint page URL.
+The Identifiers.org virtual SPARQL endpoint can be used to list all alternative IRI schemes available for a given IRI. It can also be used to check whether two IRIs describes the same concept (although it is not a mapping service between entities provided by different datasets). Example queries can be found at the endpoint page URL.
 
 With the Identifiers.org SPARQL service, it is possible to avoid using string manipulation within a SPARQL query (figure \ref{translatestuff}) and does not require users to know which IRI patterns are being used within a given resource.
 
@@ -77,11 +77,11 @@ SELECT DISTINCT ?species ?annotation ?description WHERE {
    ?species bqbio:isVersionOf ?annotation .
    
    SERVICE <http://identifiers.org/services/sparql>{
-      ?annotation owl:sameAs ?otherURIs .
+      ?annotation owl:sameAs ?otherIRIs .
    }
    
    SERVICE <http://bioportal.bio2rdf.org/sparql>{
-      ?otherURIs dcterms:description ?description .
+      ?otherIRIs dcterms:description ?description .
    }        
 }LIMIT 10
 \end{verbatim}
