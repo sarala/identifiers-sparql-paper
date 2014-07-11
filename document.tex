@@ -1,7 +1,7 @@
 \documentclass{bioinfo}
 \copyrightyear{2005}
 \pubyear{2005}
-
+\usepackage{url}
 \begin{document}
 \firstpage{1}
 
@@ -52,7 +52,9 @@ The OpenRDF Sesame SPARQL engine (\cite{SESAME}) was extended to translate speci
 
 The database underlying Identifiers.org's Registry was extended in order to record alternative IRI schemes. This has additionally required a curational effort to ensure the necessary information has been stored in the Registry.
 
-This is a "virtual" SPARQL endpoint, directly driven by the database underpinning the Registry, since a triple store would not have been able to provide the on demand conversion services required. LODEStar (\cite{LODEStar}), used by the EBI RDF platform, has been deployed to provide a query interface.
+This is a ``virtual'' SPARQL endpoint, directly driven by the relational database underpinning the Registry.
+While the same extension logic could be coded directly in a native SPARQL platform. However we chose to reuse the existing Identifiers.org infrastructure for pragmatic reasons. 
+LODEStar (\cite{LODEStar}), used by the EBI RDF platform, has been deployed to provide a query interface for users.
 \end{methods}
 
 \section{Results}
@@ -60,7 +62,10 @@ The Identifiers.org virtual SPARQL endpoint can be used to list all alternative 
 
 With the Identifiers.org SPARQL service, it is possible to avoid using string manipulation within a SPARQL query (figure \ref{translatestuff}) and does not require users to know which IRI patterns are being used within a given resource.
 
-The query below illustrates how the service can be used to integrate resources using different IRI schemes. In this example, the resources are the BioModels Linked Dataset and Bio2RDF which uses IRIs of the form "http://identifiers.org/go/GO:0006915" and "http://bio2rdf.org/go:0006915" for Gene Ontology terms (\cite{Ashburner2000}). The query lists the cross-references to GO terms present in the computational model "Edelstein1996 - EPSP ACh event" (BIOMD0000000001). It is executed from the BioModels' SPARQL endpoint (http://www.ebi.ac.uk/rdf/services/biomodels/sparql) and connects to Identifiers.org to retrieve the alternative IRIs for the retrieved GO terms. Those are then passed to the Bio2RDF SPARQL endpoint to retrieve the description of each GO term.
+The query below illustrates how the service can be used to integrate resources using different IRI schemes. 
+In this example, the resources are the BioModels Linked Dataset and Bio2RDF which uses IRIs of the form \url{http://identifiers.org/go/GO:0006915} and \url{http://bio2rdf.org/go:0006915} for Gene Ontology terms (\cite{Ashburner2000}). 
+The query lists the cross-references to GO terms present in the computational model ``Edelstein1996 - EPSP ACh event'' (BIOMD0000000001).
+It is executed from the BioModels' SPARQL endpoint (\url{http://www.ebi.ac.uk/rdf/services/biomodels/sparql}) and connects to Identifiers.org to retrieve the alternative IRIs for the retrieved GO terms. Those are then passed to the Bio2RDF SPARQL endpoint to retrieve the description of each GO term.
 
 \begin{figure}[h]
 %PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
