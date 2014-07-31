@@ -4,7 +4,7 @@
 \begin{document}
 \firstpage{1}
 
-\title[Identifiers.org virtual SPARQL endpoint for IRI schemes conversion]{Identifiers.org virtual SPARQL endpoint for IRI schemes conversion}
+\title[SPARQL-enabled identifier conversion with Identifiers.org]{SPARQL-enabled identifier conversion with Identifiers.org}
 \author[Sarala M. Wimalaratne \textit{et~al}]{Sarala M Wimalaratne\,$^{1, \footnote{To whom correspondence should be addressed}, \footnote{The first two authors should be regarded as joint first authors}}$, Jerven Bolleman\,$^{2,  \footnotemark[\value{footnote}]}$, Nick Juty\,$^{1}$, Toshiaki Katayama\,$^{3}$, Michel Dumontier\,$^{4}$, Nicole Redaschi\,$^{2}$, Nicolas Le Nov{\`e}re\,$^{1,5}$, Henning Hermjakob\,$^{1}$, and Camille Laibe\,$^1$}
 \address{$^{1}$European Molecular Biology Laboratory, European Bioinformatics Institute (EMBL-EBI), Wellcome Trust Genome Campus, Hinxton, Cambridge CB10 1SD, UK \\
 $^{2}$Swiss-Prot group, SIB Swiss Institute of Bioinformatics, Centre Medical Universitaire, 1211 Geneve, Switzerland \\
@@ -20,13 +20,13 @@ $^{5}$Babraham Institute, Babraham Research Campus, Cambridge, CB22 3AT, UK}
 
 \begin{abstract}
 \section{Motivation:}
-On the Semantic Web, in life sciences in particular, data is often distributed via multiple resources. Each of these sources is likely to use their own IRI (International Resource Identifier) for conceptually the same resource or database record. This multitude of identifiers introduces a barrier when executing federated SPARQL queries between different datasets.
+On the Semantic Web, in life sciences in particular, data is often distributed via multiple resources. Each of these sources is likely to use their own IRI (International Resource Identifier) for conceptually the same resource or database record. The lack of correspondence between identifiers introduces a barrier when executing federated SPARQL queries across life science data.
 
 \section{Results:}
-We introduce a virtual SPARQL endpoint provided by Identifiers.org, using its Registry's knowledge about IRI patterns, to automatically translate identifiers from one IRI pattern to another, making querying across resources easier and more robust.
+We introduce a novel SPARQL-based service to enable on-the-fly integration of life science data. This service uses the identifiers patterns defined in the Identifiers.org registry to generate a plurality of identifier variants, which can then be used to match source identifiers with target identifiers. WE demonstrate the utility of this identifier integration approach by answering queries across major producers of life science Linked Data.
 
 \section{Availability:}
-This IRI translating endpoint is available at \linebreak\href{http://identifiers.org/services/sparql}{http://identifiers.org/services/sparql} and is free to use for all.
+The SPARQL-based identifier conversion service is available without restriction at \linebreak\href{http://identifiers.org/services/sparql}{http://identifiers.org/services/sparql}.
 
 \section{Contact:} \href{sarala@ebi.ac.uk}{Sarala M Wimalaratne}
 \end{abstract}
