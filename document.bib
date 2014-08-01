@@ -100,3 +100,103 @@
     language={English}
 }
 
+@article{Kawano2014,
+	abstract = {TogoTable (http://togotable.dbcls.jp/) is a web tool that adds user-specified annotations to a table that a user uploads. Annotations are drawn from several biological databases that use the Resource Description Framework (RDF) data model. TogoTable uses database identifiers (IDs) in the table as a query key for searching. RDF data, which form a network called Linked Open Data (LOD), can be searched from SPARQL endpoints using a SPARQL query language. Because TogoTable uses RDF, it can integrate annotations from not only the reference database to which the IDs originally belong, but also externally linked databases via the LOD network. For example, annotations in the Protein Data Bank can be retrieved using GeneID through links provided by the UniProt RDF. Because RDF has been standardized by the World Wide Web Consortium, any database with annotations based on the RDF data model can be easily incorporated into this tool. We believe that TogoTable is a valuable Web tool, particularly for experimental biologists who need to process huge amounts of data such as high-throughput experimental output.},
+	author = {Kawano, Shin and Watanabe, Tsutomu and Mizuguchi, Sohei and Araki, Norie and Katayama, Toshiaki and Yamaguchi, Atsuko},
+	doi = {10.1093/nar/gku403},
+	issn = {1362-4962},
+	journal = {Nucleic acids research},
+	pages = {gku403--},
+	pmid = {24829452},
+	title = {{TogoTable: cross-database annotation system using the Resource Description Framework (RDF) data model.}},
+	url = {http://nar.oxfordjournals.org/content/early/2014/05/14/nar.gku403.abstract.html?papetoc},
+	year = {2014}
+}
+
+@article{Chichester2014,
+	abstract = {Understanding how genetic differences between individuals impact the regulation, expression, and ultimately function of proteins is an important step toward realizing the promise of personal medicine. There are several technical barriers hindering the transition of biological knowledge into the applications relevant to precision medicine. One important challenge for data integration is that new biological sequences (proteins, DNA) have multiple issues related to interoperability potentially creating a quagmire in the published data, especially when different data sources do not appear to be in agreement. Thus, there is an urgent need for systems and methodologies to facilitate the integration of information in a uniform manner to allow seamless querying of multiple data types which can illuminate, for example, the relationships between protein modifications and causative genomic variants. Our work demonstrates for the first time how semantic technologies can be used to address these challenges using the nanopublication model applied to the neXtProt data set, a curated knowledgebase of information about human proteins. We have applied the nanopublication model to demonstrate querying over several named graphs, including the provenance information associated with the curated scientific assertions from neXtProt. We show by way of use cases using sequence variations, post-translational modifications (PTMs) and tissue expression, that querying the neXtProt nanopublication implementation is a credible approach for expanding biological insight.},
+	author = {Chichester, Christine and Gaudet, Pascale and Karch, Oliver and Groth, Paul and Lane, Lydie and Bairoch, Amos and Mons, Barend and Loizou, Antonis},
+	doi = {10.1016/j.websem.2014.05.001},
+	issn = {15708268},
+	journal = {Web Semantics: Science, Services and Agents on the World Wide Web},
+	keywords = {Nanopublication,Polymorphism,Post-translation modification,RDF,Tissue expression},
+	month = jun,
+	title = {{Querying neXtProt nanopublications and their value for insights on sequence variants and tissue expression}},
+	url = {http://www.sciencedirect.com/science/article/pii/S1570826814000432},
+	year = {2014}
+}
+
+@article{Wein2012,
+	abstract = {The Protein Identifier Cross-Reference (PICR) service is a tool that allows users to map protein identifiers, protein sequences and gene identifiers across over 100 different source databases. PICR takes input through an interactive website as well as Representational State Transfer (REST) and Simple Object Access Protocol (SOAP) services. It returns the results as HTML pages, XLS and CSV files. It has been in production since 2007 and has been recently enhanced to add new functionality and increase the number of databases it covers. Protein subsequences can be Basic Local Alignment Search Tool (BLAST) against the UniProt Knowledgebase (UniProtKB) to provide an entry point to the standard PICR mapping algorithm. In addition, gene identifiers from UniProtKB and Ensembl can now be submitted as input or mapped to as output from PICR. We have also implemented a 'best-guess' mapping algorithm for UniProt. In this article, we describe the usefulness of PICR, how these changes have been implemented, and the corresponding additions to the web services. Finally, we explain that the number of source databases covered by PICR has increased from the initial 73 to the current 102. New resources include several new species-specific Ensembl databases as well as the Ensembl Genome ones. PICR can be accessed at http://www.ebi.ac.uk/Tools/picr/.},
+	author = {Wein, Samuel P. and Côté, Richard G. and Dumousseau, Marine and Reisinger, Florian and Hermjakob, Henning and Vizca??no, Juan A.},
+	journal = {Nucleic Acids Research},
+	number = {W1},
+	pmid = {22544604},
+	title = {{Improvements in the protein identifier cross-reference service}},
+	volume = {40},
+	year = {2012}
+}
+
+@article{VanIersel2010,
+	abstract = {BACKGROUND: Many complementary solutions are available for the identifier mapping problem. This creates an opportunity for bioinformatics tool developers. Tools can be made to flexibly support multiple mapping services or mapping services could be combined to get broader coverage. This approach requires an interface layer between tools and mapping services. RESULTS: Here we present BridgeDb, a software framework for gene, protein and metabolite identifier mapping. This framework provides a standardized interface layer through which bioinformatics tools can be connected to different identifier mapping services. This approach makes it easier for tool developers to support identifier mapping. Mapping services can be combined or merged to support multi-omics experiments or to integrate custom microarray annotations. BridgeDb provides its own ready-to-go mapping services, both in webservice and local database forms. However, the framework is intended for customization and adaptation to any identifier mapping service. BridgeDb has already been integrated into several bioinformatics applications. CONCLUSION: By uncoupling bioinformatics tools from mapping services, BridgeDb improves capability and flexibility of those tools. All described software is open source and available at http://www.bridgedb.org.},
+	author = {van Iersel, Martijn P and Pico, Alexander R and Kelder, Thomas and Gao, Jianjiong and Ho, Isaac and Hanspers, Kristina and Conklin, Bruce R and Evelo, Chris T},
+	institution = {Department of Bioinformatics-BiGCaT, Maastricht University, Maastricht, the Netherlands. martijn.vaniersel@bigcat.unimaas.nl},
+	journal = {BMC bioinformatics},
+	pages = {5},
+	title = {{The BridgeDb framework: standardized access to gene, protein and metabolite identifier mapping services.}},
+	volume = {11},
+	year = {2010}
+}
+
+@article{Smith2007,
+	abstract = {BACKGROUND: A key abstraction in representing proteomics knowledge is the notion of unique identifiers for individual entities (e.g. proteins) and the massive graph of relationships among them. These relationships are sometimes simple (e.g. synonyms) but are often more complex (e.g. one-to-many relationships in protein family membership). RESULTS: We have built a software system called LinkHub using Semantic Web RDF that manages the graph of identifier relationships and allows exploration with a variety of interfaces. For efficiency, we also provide relational-database access and translation between the relational and RDF versions. LinkHub is practically useful in creating small, local hubs on common topics and then connecting these to major portals in a federated architecture; we have used LinkHub to establish such a relationship between UniProt and the North East Structural Genomics Consortium. LinkHub also facilitates queries and access to information and documents related to identifiers spread across multiple databases, acting as "connecting glue" between different identifier spaces. We demonstrate this with example queries discovering "interologs" of yeast protein interactions in the worm and exploring the relationship between gene essentiality and pseudogene content. We also show how "protein family based" retrieval of documents can be achieved. LinkHub is available at hub.gersteinlab.org and hub.nesg.org with supplement, database models and full-source code. CONCLUSION: LinkHub leverages Semantic Web standards-based integrated data to provide novel information retrieval to identifier-related documents through relational graph queries, simplifies and manages connections to major hubs such as UniProt, and provides useful interactive and query interfaces for exploring the integrated data.},
+	author = {Smith, Andrew K and Cheung, Kei-Hoi and Yip, Kevin Y and Schultz, Martin and Gerstein, Mark K},
+	institution = {Department of Computer Science, Yale University, New Haven, Connecticut, 06520 USA. andrew.smith@yale.edu},
+	journal = {BMC bioinformatics},
+	pages = {S5},
+	title = {{LinkHub: a Semantic Web system that facilitates cross-database queries and information retrieval in proteomics.}},
+	volume = {8 Suppl 3},
+	year = {2007}
+}
+
+@article{Huang2011,
+	abstract = {MOTIVATION: Identifier (ID) mapping establishes links between various biological databases and is an essential first step for molecular data integration and functional annotation. ID mapping allows diverse molecular data on genes and proteins to be combined and mapped to functional pathways and ontologies. We have developed comprehensive protein-centric ID mapping services providing mappings for 90 IDs derived from databases on genes, proteins, pathways, diseases, structures, protein families, protein interaction, literature, ontologies, etc. The services are widely used and have been regularly updated since 2006. AVAILABILITY: www.uniprot.org/mappingandproteininformation-resource.org/pirwww/search/idmapping.shtml CONTACT: huang@dbi.udel.edu.},
+	author = {Huang, Hongzhan and McGarvey, Peter B. and Suzek, Baris E. and Mazumder, Raja and Zhang, Jian and Chen, Yongxing and Wu, Cathy H.},
+	journal = {Bioinformatics},
+	number = {8},
+	pages = {1190--1191},
+	pmid = {21478197},
+	title = {{A comprehensive protein-centric ID mapping service for molecular data integration}},
+	volume = {27},
+	year = {2011}
+}
+
+@article{Chambers2013,
+	abstract = {UniChem is a freely available compound identifier mapping service on the internet, designed to optimize the efficiency with which structure-based hyperlinks may be built and maintained between chemistry-based resources. In the past, the creation and maintenance of such links at EMBL-EBI, where several chemistry-based resources exist, has required independent efforts by each of the separate teams. These efforts were complicated by the different data models, release schedules, and differing business rules for compound normalization and identifier nomenclature that exist across the organization. UniChem, a large-scale, non-redundant database of Standard InChIs with pointers between these structures and chemical identifiers from all the separate chemistry resources, was developed as a means of efficiently sharing the maintenance overhead of creating these links. Thus, for each source represented in UniChem, all links to and from all other sources are automatically calculated and immediately available for all to use. Updated mappings are immediately available upon loading of new data releases from the sources. Web services in UniChem provide users with a single simple automatable mechanism for maintaining all links from their resource to all other sources represented in UniChem. In addition, functionality to track changes in identifier usage allows users to monitor which identifiers are current, and which are obsolete. Lastly, UniChem has been deliberately designed to allow additional resources to be included with minimal effort. Indeed, the recent inclusion of data sources external to EMBL-EBI has provided a simple means of providing users with an even wider selection of resources with which to link to, all at no extra cost, while at the same time providing a simple mechanism for external resources to link to all EMBL-EBI chemistry resources.},
+	author = {Chambers, Jon and Davies, Mark and Gaulton, Anna and Hersey, Anne and Velankar, Sameer and Petryszak, Robert and Hastings, Janna and Bellis, Louisa and McGlinchey, Shaun and Overington, John P},
+	doi = {10.1186/1758-2946-5-3},
+	isbn = {1758-2946 (Print)$\backslash$r1758-2946 (Linking)},
+	issn = {1758-2946},
+	journal = {Journal of cheminformatics},
+	keywords = {Chemical databases,Data integration,InChi,InChiKey,UniChem},
+	number = {1},	pages = {3},
+	pmid = {23317286},
+	title = {{UniChem: a unified chemical structure cross-referencing and identifier tracking system.}},
+	url = {http://doi.org/10.1186/1758-2946-5-3$\backslash$nhttp://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3616875\&tool=pmcentrez\&rendertype=abstract},
+	volume = {5},
+	year = {2013}
+}
+
+@article{Day2011,
+	abstract = {Studies integrating transcriptomic data with proteomic data can illuminate the proteome more clearly than either separately. Integromic studies can deepen understanding of the dynamic complex regulatory relationship between the transcriptome and the proteome. Integrating these data dictates a reliable mapping between the identifier nomenclature resultant from the two high-throughput platforms. However, this kind of analysis is well known to be hampered by lack of standardization of identifier nomenclature among proteins, genes, and microarray probe sets. Therefore data integration may also play a role in critiquing the fallible gene identifications that both platforms emit.},
+	author = {Day, Roger S and McDade, Kevin K and Chandran, Uma R and Lisovich, Alex and Conrads, Thomas P and Hood, Brian L and Kolli, V S Kumar and Kirchner, David and Litzi, Traci and Maxwell, G Larry},
+	file = {:C$\backslash$:/Users/sarala.EBI/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Day et al. - 2011 - Identifier mapping performance for integrating transcriptomics and proteomics experimental results.pdf:pdf},
+	institution = {Department of Biomedical Informatics, University of Pittsburgh School of Medicine, Pittsburgh, PA 15261, USA. day01@pitt.edu},
+	journal = {BMC bioinformatics},
+	pages = {213},
+	title = {{Identifier mapping performance for integrating transcriptomics and proteomics experimental results.}},
+	volume = {12},
+	year = {2011}
+}
+
+
