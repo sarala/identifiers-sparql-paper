@@ -40,13 +40,13 @@ To address the issue of identifier heterogeneity, we have developed a SPARQL-bas
 
 \begin{methods}
 \section{Methods}
-We implemented a SPARQL-based service that generates a set of variant identifiers based on a provided identifier. This service, implemented using the OpenRDF Sesame SPARQL engine (http://www.openrdf.org/), translates an incoming query pattern of the form <subject_IRI> $\mathtt{owl\textcolon{}sameAs}$ ?target_iri and generates a set of triples with the specific subject, predicate, and the generated target IRI. The service queries the curated Identifiers.org Registry to determine the originating data collection, then obtains alternative IRIs patterns, and finally generates and returns alternative IRIs. While this implementation queries the relational database that underpins the Identifiers.org Registry, others could implement a similar service using the Registry's public web services.
+We implemented a SPARQL-based service that generates a set of variant identifiers based on a provided identifier. This service, implemented using the OpenRDF Sesame SPARQL engine (http://www.openrdf.org/), translates an incoming query pattern of the form <subjectIRI> $\mathtt{owl\textcolon{}sameAs}$ ?targetIRI and generates a set of triples with the specific subject, predicate, and the generated target IRI. The service queries the curated Identifiers.org Registry to determine the originating data collection, then obtains alternative IRIs patterns, and finally generates and returns alternative IRIs. While this implementation queries the relational database that underpins the Identifiers.org Registry, others could implement a similar service using the Registry's public web services.
 \end{methods}
 
 \section{Results}
-The Identifiers.org SPARQL service can be used to list all alternative IRI schemes available for an IRI pattern that is available in the Identifiers.org Registry. Currently, the Identifiers.org Registry contains 531 datasets and 1332 IRI patterns, therefore providing a total of 707292 IRI translations. For supported datasets, this service eliminates the need to know the set of valid IRI patterns in advance and the need to devise elaborate string manipulation operations in a federated SPARQL query (figure \ref{translatestuff}).
+The Identifiers.org SPARQL service can be used to list all alternative IRI schemes available for an IRI pattern that is available in the Identifiers.org Registry. Currently, the Identifiers.org Registry contains 531 datasets and 1332 IRI patterns, therefore providing a total of 707292 IRI translations. For supported datasets, this service eliminates the need to know the set of valid IRI patterns in advance and the need to devise elaborate string manipulation operations in a federated SPARQL query (figure \ref{example1}).
 
-The query below illustrates how the service can be used to query across datasets with different IRI schemes. In this example, we obtain the definitions for Gene Ontology terms that are used to annotate the species in ``Edelstein1996 - EPSP ACh event'' (BIOMD0000000001) from the BioModels database. The service bridges the gap between the Identifiers.org-specified Gene Ontology term \href{http://identifiers.org/go/GO:0006915}{http://identifiers.org/go/GO:0006915} and the Bio2RDF-specified identifier for the Gene Ontology term \href{http://bio2rdf.org/go:0006915} {http://bio2rdf.org/go:0006915}. This query can be executed from the BioModels' SPARQL endpoint (\href{http://www.ebi.ac.uk/rdf/services/biomodels/sparql}{http://www.ebi.ac.uk/rdf/services/biomodels/sparql}).
+The query below illustrates how the service can be used to query across datasets with different IRI schemes. In this example, we obtain the definitions for Gene Ontology terms that are used to annotate the species in a model from the BioModels database. The service bridges the gap between the Identifiers.org-specified and the Bio2RDF-specified identifier for the Gene Ontology term. This query can be executed from the BioModels' SPARQL endpoint.
 
 \begin{figure}[h]
 %PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -57,34 +57,57 @@ The query below illustrates how the service can be used to query across datasets
 %PREFIX bqbio: <http://biomodels.net/biology-qualifiers#>
 {\scriptsize
 \begin{verbatim}
-
 SELECT DISTINCT ?species ?go_term ?go_description WHERE {
    ?model sbmlrdf:species ?s . 
    ?s sbmlrdf:name ?species .
    ?s bqbio:isVersionOf ?go_term 
    FILTER (?model = <http://identifiers.org/biomodels.db/BIOMD0000000001>)
    FILTER regex(?go_term,"go","i")
-
    SERVICE <http://identifiers.org/services/sparql>{
       ?go_term owl:sameAs ?go .
    }
-
    SERVICE <http://bioportal.bio2rdf.org/sparql>{
       ?go dcterms:description ?go_description .
    }
 }LIMIT 10
-
-
 \end{verbatim}
 }
 \caption{Using Identifiers.org SPARQL service to transform Identifiers.org IRIs into Bio2RDF IRIs.}
-\label{translatestuff}
+\label{example1}
 \end{figure}
 
-Similarly we could write a SPARQL query at the uniprot.org SPARQL endpoint that combines information in UniProt and Wikipathways. SERVICE clause using Identifiers.org SPARQL endpoint to transform the purl.uniprot.org form of IRIs to Identifiers.org which are used in UniProtKB and Wikipathways, respectively. Further examples including the queries discussed here are available at \href{http://identifiers.org/documentation}{http://identifiers.org/documentation}.
+Similarly we could write a SPARQL query at the uniprot.org SPARQL endpoint that combines information in UniProt and Wikipathways. SERVICE clause using Identifiers.org SPARQL endpoint to transform the purl.uniprot.org form of IRIs to Identifiers.org which are used in UniProtKB and Wikipathways, respectively (figure \ref{example2}). Further examples including the queries discussed here are available at \href{http://identifiers.org/documentation}{http://identifiers.org/documentation}.
 
+\begin{figure}[h]
+%PREFIX up: <http://purl.uniprot.org/core/>
+%PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
+%PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+%PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+%PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+%PREFIX owl: <http://www.w3.org/2002/07/owl#>
+%PREFIX dcterms: <http://purl.org/dc/terms/>
+%PREFIX dc: <http://purl.org/dc/elements/1.1/>
+{\scriptsize
+\begin{verbatim}		
+SELECT ?protein ?diseaseComment ?pathway ?pathwayName WHERE {
+   ?protein up:annotation/up:disease/rdfs:comment ?diseaseComment .
+   SERVICE <http://identifiers.org/services/sparql>{
+      ?protein owl:sameAs ?otherIRIs .
+   }
+   SERVICE <http://sparql.wikipathways.org/> {
+      ?x dcterms:isPartOf ?pathway; ?z ?otherIRIs .
+      ?pathway dc:title ?pathwayName
+   }
+}
+LIMIT 10
+\end{verbatim}
+}
+\caption{Using Identifiers.org SPARQL service to transform UniProt IRIs into Identifiers.org IRIs.}
+\label{example2}
+\end{figure}
+    
 \section{Discussion}
-Leveraging the wealth of biomedical big data for discovery requires simple and effective approaches to tame the challenge of working with heterogeneous, overlapping, and diverse data. Of particular concern is assignment of different identifiers for identical resources as well as for conceptually identical resources. Identifier integration is the subject of much research that focuses either on integrating conceptually identical objects or their relations (\cite{Day2011}, \cite{VanIersel2010}, \cite{Wein2012}, \cite{Smith2007}, \cite{Chambers2013}, \cite{Huang2011}). In contrast, our work focuses on the problem of having multiple identifiers for the same database object, which is an emerging issue among semantic web data providers. Our solution is rapid, scalable, and will grow to provide new identifier-based mappings as additional IRI patterns are added to the Identifiers.org Registry. 
+Leveraging the wealth of biomedical big data for discovery requires simple and effective approaches to tame the challenge of working with heterogeneous, overlapping, and diverse data. Of particular concern is assignment of different identifiers for identical resources as well as for conceptually identical resources. Identifier integration is the subject of much research that focuses either on integrating conceptually identical objects or their relations (\cite{VanIersel2010}, \cite{Wein2012}, \cite{Smith2007}, \cite{Chambers2013}). In contrast, our work focuses on the problem of having multiple identifiers for the same database object, which is an emerging issue among semantic web data providers. Our solution is rapid, scalable, and will grow to provide new identifier-based mappings as additional IRI patterns are added to the Identifiers.org Registry. 
 
 \section{Conclusion}
 This IRI conversion service, provided by Identifiers.org as a SPARQL service, will enable users to focus on asking meaningful questions across biological datasets of interest rather than figuring out how to generate the right identifiers. 
@@ -100,9 +123,7 @@ This work received support from the BBSRC (BB/J019305/1), Japanese grants (?), N
 %\bibliographystyle{plainnat}
 %\bibliographystyle{abbrv}
 %\bibliographystyle{bioinformatics}
-%
 %\bibliographystyle{plain}
-%
 %\bibliography{Document}
 \bibliography{document}  
 
