@@ -44,7 +44,7 @@ We implemented a SPARQL-based service that generates a set of variant identifier
 \end{methods}
 
 \section{Results}
-The Identifiers.org SPARQL service can be used to list all alternative IRI schemes available for an IRI pattern that is available in the Identifiers.org Registry. Currently, the Identifiers.org Registry contains 531 datasets and 1332 IRI patterns, therefore providing a total of 707292 IRI translations. For supported datasets, this service eliminates the need to know the set of valid IRI patterns in advance and the need to devise elaborate string manipulation operations in a federated SPARQL query (figure \ref{example1}).
+The Identifiers.org SPARQL service can be used to list all alternative IRI schemes available for an IRI pattern that is available in the Identifiers.org Registry. Currently, the Identifiers.org Registry contains 531 data collections and 1332 IRI patterns. For supported data collections, this service eliminates the need to know the set of valid IRI patterns in advance and the need to devise elaborate string manipulation operations in a federated SPARQL query (figure \ref{example1}).
 
 The query below illustrates how the service can be used to query across datasets with different IRI schemes. In this example, we obtain the definitions for Gene Ontology terms that are used to annotate the species in a model from the BioModels database. The service bridges the gap between the Identifiers.org-specified and the Bio2RDF-specified identifier for the Gene Ontology term. This query can be executed from the BioModels' SPARQL endpoint.
 
