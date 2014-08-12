@@ -61,11 +61,10 @@ PREFIX up:<http://purl.uniprot.org/core/>
 PREFIX taxon:<http://purl.uniprot.org/taxonomy/> 
 
 SELECT DISTINCT ?protein ?protein_domain ?domain_label WHERE {
-   ?model sbmlrdf:species ?s . 
+   biomodel:BIOMD0000000372 sbmlrdf:species ?s . 
    ?s sbmlrdf:name ?species .
    ?s bqbio:isVersionOf ?protein_term 
-   FILTER (?model = biomodel:BIOMD0000000372)
-
+   
    SERVICE <http://identifiers.org/services/sparql>{
       ?protein_term owl:sameAs ?protein .
    }
@@ -74,7 +73,7 @@ SELECT DISTINCT ?protein ?protein_domain ?domain_label WHERE {
       ?protein a up:Protein ; 
       up:organism taxon:9606 ;
       rdfs:seeAlso ?protein_domain 
-      FILTER regex(?protein_domain,"IPR0","i").
+      FILTER (regex(str(?protein_domain),"IPR0","i")) .
    }
 
    SERVICE <http://identifiers.org/services/sparql>{
