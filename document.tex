@@ -23,16 +23,16 @@ $^{5}$Babraham Institute, Babraham Research Campus, Cambridge, CB22 3AT, UK}
 On the Semantic Web, in life sciences in particular, data is often distributed via multiple resources. Each of these sources is likely to use their own IRI (International Resource Identifier) for conceptually the same resource or database record. The lack of correspondence between identifiers introduces a barrier when executing federated SPARQL queries across life science data.
 
 \section{Results:}
-We introduce a novel SPARQL-based service to enable on-the-fly integration of life science data. This service uses the identifiers patterns defined in the Identifiers.org Registry to generate a plurality of identifier variants, which can then be used to match source identifiers with target identifiers. We demonstrate the utility of this identifier integration approach by answering queries across major producers of life science Linked Data.
+We introduce a novel SPARQL-based service to enable on-the-fly integration of life science data. This service uses the identifier patterns defined in the Identifiers.org Registry to generate a plurality of identifier variants, which can then be used to match source identifiers with target identifiers. We demonstrate the utility of this identifier integration approach by answering queries across major producers of life science Linked Data.
 
 \section{Availability:}
 The SPARQL-based identifier conversion service is available without restriction at \linebreak\href{http://identifiers.org/services/sparql}{http://identifiers.org/services/sparql}.
 
-\section{Contact:} \href{sarala@ebi.ac.uk}{Sarala M Wimalaratne}
+\section{Contact:} sarala@ebi.ac.uk
 \end{abstract}
 
 \section{Introduction}
-Semantic Web technologies such as the Resource Description Framework (RDF; http://www.w3.org/TR/rdf-primer/) offer a powerful paradigm for publishing and exploring life science data through standardization of format and data access. For example, the open source Bio2RDF (\cite{Biordf2}) project converts dozens of public biological databases and datasets from legacy formats into RDF, and provides a mechanism to explore these as Linked Data. Recently, established bioinformatic organizations such as DBCLS \href{http://togows.dbcls.jp/}{http://togows.dbcls.jp/}, NCBI \href{https://pubchem.ncbi.nlm.nih.gov/rdf/}{https://pubchem.ncbi.nlm.nih.gov/rdf/}, NexProt (\cite{Chichester2014}), and the EMBL-EBI in collaboration with the UniProt consortium (\cite{Jupp01052014}) have made some datasets available in RDF, thereby significantly extending the network of the Linked Open Data.
+Semantic Web technologies such as the Resource Description Framework (RDF; http://www.w3.org/TR/rdf-primer/) offer a powerful paradigm for publishing and exploring life science data through standardization of format and data access. For example, the open source Bio2RDF (\cite{Biordf2}) project converts dozens of public biological databases and datasets from legacy formats into RDF, and provides a mechanism to explore these as Linked Data. Recently, established bioinformatic organizations such as DBCLS (\href{http://togows.dbcls.jp/}{http://togows.dbcls.jp/}), NCBI (\href{https://pubchem.ncbi.nlm.nih.gov/rdf/}{https://pubchem.ncbi.nlm.nih.gov/rdf/}), neXtProt (\cite{Chichester2014}), and the EMBL-EBI in collaboration with the UniProt consortium (\cite{Jupp01052014}) have made some datasets available in RDF, thereby significantly extending the network of the Linked Open Data.
 
 All efforts use HTTP-based International Resource Identifiers (IRIs) to identify and link data items. This facilitates querying across network-linked resources, but the lack of a universal identifier system requires mappings across all the different identifiers in use. Identifiers.org (\cite{Juty01012012}) provides resolvable persistent IRIs used to identify individual records (based on the existing entity identifiers assigned directly by the data providers). Although some linked data providers such as Bio2RDF and the EBI now make their data available with identifiers.org URIs (or mappings to them), this practice is not widely implemented. Therefore, the identifier mismatch makes it difficult to query multiple datasets simultaneously. String manipulation, supported by SPARQL, may be used for this purpose but requires users to know in advance the IRI types being used in each resource, making it a cumbersome and inefficient solution.
  
@@ -46,7 +46,8 @@ We implemented a SPARQL-based service that generates a set of variant identifier
 \section{Results}
 The Identifiers.org Registry contains 531 data collections and over 1300 IRI patterns. For supported data collections, this service eliminates the need to know the set of valid IRI patterns in advance and the need to devise elaborate string manipulation operations in a federated SPARQL query (figure \ref{example1}).
 
-The query below illustrates how the service can be used to query across datasets with different IRI schemes. In this example, we run a federated query to find human proteins from UniProt and their domains from InterPro Bio2RDF that are used in a model's components (of type SBML species) from BioModels Linked Dataset (\cite{Wimalaratne2014}). This query can be executed using BioModels SPARQL endpoint \href{http://www.ebi.ac.uk/rdf/services/biomodels/sparql}{http://www.ebi.ac.uk/rdf/services/biomodels/sparql}. The service bridges the gap between the Identifiers.org-specified, Bio2RDF-specified, and UniProt-specified identifiers. Further examples, are readily available at \href{http://identifiers.org/documentation}{http://identifiers.org/documentation}.
+The query below illustrates how the service can be used to query across datasets with different IRI schemes. In this example, we run a federated query to find human proteins from UniProt and their domains from InterPro Bio2RDF that are used in a model's components (of type SBML species) from BioModels Linked Dataset (\cite{Wimalaratne2014}). This query can be executed using BioModels SPARQL endpoint 
+(\href{http://www.ebi.ac.uk/rdf/services/biomodels/sparql}{http://www.ebi.ac.uk/rdf/services/biomodels/sparql}) and takes around 20 seconds. The service bridges the gap between the Identifiers.org-specified, Bio2RDF-specified, and UniProt-specified identifiers. Further examples are readily available at \href{http://identifiers.org/documentation}{http://identifiers.org/documentation}.
 
 \begin{figure}[h]
 {\scriptsize
@@ -61,10 +62,9 @@ PREFIX up:<http://purl.uniprot.org/core/>
 PREFIX taxon:<http://purl.uniprot.org/taxonomy/> 
 
 SELECT DISTINCT ?protein ?protein_domain ?domain_label WHERE {
-   ?model sbmlrdf:species ?s . 
+   biomodel:BIOMD0000000372 sbmlrdf:species ?s . 
    ?s sbmlrdf:name ?species .
-   ?s bqbio:isVersionOf ?protein_term 
-   FILTER (?model = biomodel:BIOMD0000000372)
+   ?s bqbio:isVersionOf ?protein_term .
 
    SERVICE <http://identifiers.org/services/sparql>{
       ?protein_term owl:sameAs ?protein .
@@ -82,9 +82,9 @@ SELECT DISTINCT ?protein ?protein_domain ?domain_label WHERE {
    }
 
    SERVICE<http://interpro.bio2rdf.org/sparql>  {
-      ?uris dcterms:title ?domain_label.
+      ?uris dcterms:title ?domain_label .
    }      
-}LIMIT 10
+}
 \end{verbatim}
 }
 \caption{Using Identifiers.org SPARQL service to transform IRIs.}
