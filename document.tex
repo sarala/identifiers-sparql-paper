@@ -50,7 +50,7 @@ The query below illustrates how the service can be used to query across datasets
 (\href{http://www.ebi.ac.uk/rdf/services/biomodels/sparql}{http://www.ebi.ac.uk/rdf/services/biomodels/sparql}) and takes around 20 seconds. The service bridges the gap between the Identifiers.org-specified, Bio2RDF-specified, and UniProt-specified identifiers. Further examples are readily available at \href{http://identifiers.org/documentation}{http://identifiers.org/documentation}.
 
 \begin{figure}[h]
-{\scriptsize
+{\fontsize{6.5pt}{1em}
 \begin{verbatim}
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -74,7 +74,7 @@ SELECT DISTINCT ?protein ?protein_domain ?domain_label WHERE {
       ?protein a up:Protein ; 
       up:organism taxon:9606 ;
       rdfs:seeAlso ?protein_domain 
-      FILTER regex(?protein_domain,"IPR0","i").
+      FILTER (regex(str(?protein_domain),"IPR0","i")) .
    }
 
    SERVICE <http://identifiers.org/services/sparql>{
@@ -98,7 +98,7 @@ Leveraging the wealth of biomedical big data for discovery requires simple and e
 This IRI conversion service, provided by Identifiers.org as a SPARQL service, will enable users to focus on asking meaningful questions across biological datasets of interest rather than figuring out how to generate the right identifiers.
 
 \section{Funding} 
-This work was supported by the Biotechnology and Biological Sciences Research Council (BBSRC) [BB/J019305/1], the National Bioscience Database Center (NBDC) of the Japan Science and Technology Agency (JST), the National Institutes of Health (NIH) [1U41HG006104], the Swiss Federal Government through the Federal Office of Education and Science, and the European Molecular Biology Laboratory (EMBL).  
+This work was supported by the Biotechnology and Biological Sciences Research Council (BBSRC) [BB/J019305/1], the European Commission [312455], the National Bioscience Database Center (NBDC) of the Japan Science and Technology Agency (JST), the National Institutes of Health (NIH) [1U41HG006104], the Swiss Federal Government through the Federal Office of Education and Science, and the European Molecular Biology Laboratory (EMBL).  
 
 \section*{Acknowledgement}
 The authors wish to thank DBCLS for organizing the RDF summit and BioHackathons for fostering the initial discussions and development efforts, and Simon Jupp for developing the generic LODEStar user interface used by this endpoint.
